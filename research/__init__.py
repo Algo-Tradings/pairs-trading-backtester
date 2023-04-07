@@ -11,3 +11,4 @@ from research.cleaner import Cleaner
 from research.correlation import Correlation
 from research.cointegration import Cointegration
 from research.ratio import Ratio
+from research.researcher import Researcher

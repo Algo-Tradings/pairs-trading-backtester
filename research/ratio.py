@@ -10,7 +10,7 @@ class Ratio():
     def get_ratio(self, coint_df: pd.DataFrame, cleared_df: pd.DataFrame) -> pd.DataFrame:
         rationed_df = self.__apply_ratio_calc(
             cleared_df.median(numeric_only=True), coint_df)
-        rationed_df.to_csv(os.path.join(path,'..', 'data/analyzed/final_output.csv'), index=False)
+        rationed_df.to_csv(os.path.join(path,'..', 'data/researched/research_output.csv'), index=False)
         return rationed_df
 
     def __apply_ratio_calc(self, median, coint_df) -> pd.DataFrame:

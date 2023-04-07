@@ -6,5 +6,6 @@
 
 __version__ = '1.0.0'
 
-from backtesting.updater import Updater
-from backtesting.results import Results
+
+from backtester.backtester import Backtester
+from backtester.backtester import Bbands
