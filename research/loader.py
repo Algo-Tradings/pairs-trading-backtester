@@ -2,7 +2,6 @@
 import pandas as pd
 from binance.client import Client
 import os
-import datetime
 
 import ccxt
 
@@ -24,7 +23,7 @@ class Loader():
                                                             all(coin not in s['symbol'] for coin in unused_coins)]
     
         
-    def get_historical_data(self, timeframe:str, interval:str , end_date:str = None) -> pd.DataFrame:
+    def get_historical_data(self, timeframe:str, interval:str) -> pd.DataFrame:
         """
         :param timeframe: e.g. '1d', '4h', '3S', '15m' 
         :type: str
@@ -32,18 +31,18 @@ class Loader():
         :param interval: e.g. '1 year ago', '10days ago', 'datetime'
         :type: str
         """
-        hist_df = self.__set_data_merge(self.__get_multi_data(timeframe,interval, end_date))
+        hist_df = self.__set_data_merge(self.__get_multi_data(timeframe,interval))
         hist_df.to_csv(os.path.join(path,'..', 'data/raw/historical_data.csv'), index=True)
         return hist_df
         
 
-    def __get_multi_data(self, timeframe, interval, end_date) -> list:
-        return [self.__get_single_data(symbol, timeframe, interval, end_date) for symbol in self.symbols]
+    def __get_multi_data(self, timeframe, interval) -> list:
+        return [self.__get_single_data(symbol, timeframe, interval) for symbol in self.symbols]
     
     
-    def __get_single_data(self, symbol, timeframe, interval, end_date) -> pd.DataFrame:
+    def __get_single_data(self, symbol, timeframe, interval) -> pd.DataFrame:
         frame = pd.DataFrame(self.client.get_historical_klines(
-                            symbol, timeframe, interval, end_date))
+                            symbol, timeframe, f'{interval} UTC'))
         
         if len(frame) > 0:
             frame = frame.iloc[:,:5]

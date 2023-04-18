@@ -1,5 +1,7 @@
 # Development Environment
 .dev/
+__*.py
+__*.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
